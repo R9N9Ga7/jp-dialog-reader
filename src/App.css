@@ -24,6 +24,7 @@ button {
 
 p {
   font-size: 26px;
+  line-height: 2;
 }
 
 .a {
@@ -59,4 +60,14 @@ p {
 
 .read-the-docs {
   color: #888;
+}
+
+.caption {
+  position: absolute;
+  font-size: 16px;
+  top: -16px;
+  left: 50%;
+  transform: translate(-50%);
+  text-wrap: nowrap;
+  opacity: .9;
 }

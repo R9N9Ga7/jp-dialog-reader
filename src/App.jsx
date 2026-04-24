@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import './App.css'
 
 import topicDailylife from './data/topic1.json';
@@ -32,6 +33,8 @@ const topics = [
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
 function App() {
+  const [isCaptionVisible, setIsCaptionVisible] = useState(false);
+
   const urlParams = new URLSearchParams(window.location.search);
   const topicIndex = urlParams.get('topicIndex');
   const dialogIndex = urlParams.get('dialogIndex');
@@ -91,6 +94,7 @@ function App() {
       <div>
         <button onClick={() => toDialog(-1)}>Prev</button>
         <button onClick={() => toDialog(1)}>Next</button>
+        <button onClick={() => setIsCaptionVisible(!isCaptionVisible)}>{isCaptionVisible ? 'Hide Kanji Reading' : 'Show Kanji Reading'}</button>
       </div>
       {
         getCurrentTopicContent()?.utterances.map((value) => (
@@ -98,7 +102,14 @@ function App() {
             className={value.speaker === 'A' ? 'a' : 'b'}
             key={value.utterance + value.speaker}
           >
-            {value.speaker}: {value.utterance}
+            {value.speaker}: {
+              value.tokens.map((pair, index) => (
+                <span key={value.utterance + value.speaker + pair[0] + pair[1] + index} style={{ position: "relative", display: "inline-block" }}>
+                  <span className='caption' style={{ display: isCaptionVisible ? 'block' : 'none' }}>{ pair[1] }</span>
+                  <span>{ pair[0] }</span>
+                </span>
+              ))
+            }
           </p>
         ))
       }
