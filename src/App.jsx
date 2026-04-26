@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css'
 
 import topicDailylife from './data/topic1.json';
@@ -36,15 +36,17 @@ function App() {
   const [isCaptionVisible, setIsCaptionVisible] = useState(false);
 
   const urlParams = new URLSearchParams(window.location.search);
-  const topicIndex = urlParams.get('topicIndex');
-  const dialogIndex = urlParams.get('dialogIndex');
+  const [topicIndex, setTopicIndex] = useState(urlParams.get('topicIndex'));
+  const [dialogIndex, setDialogIndex] = useState(urlParams.get('dialogIndex'));
 
   const getTopicIndex = () => clamp(parseInt(topicIndex ?? 0), 0, topics.length - 1);
   const getDialogIndex = () => parseInt(dialogIndex ?? 0);
 
-  if (!dialogIndex || !topicIndex) {
-    window.location.replace('?dialogIndex=0&topicIndex=0');
-  }
+  useEffect(() => {
+    if (!dialogIndex || !topicIndex) {
+      window.location.replace('?dialogIndex=0&topicIndex=0');
+    }
+  }, []);
 
   const getCurrentTopicContent = () => {
     const index = getDialogIndex();
@@ -61,7 +63,8 @@ function App() {
   };
 
   const toDialogByIndex = (nextDialogIndex, toTopicIndex = -1) => {
-    const currentTopicContentLength = topics[getTopicIndex()].content.length;
+    const nextTopicIndex = toTopicIndex == -1 ? getTopicIndex() : clamp(toTopicIndex, 0, topics.length - 1);
+    const currentTopicContentLength = topics[nextTopicIndex].content.length;
 
     if (nextDialogIndex < 0) {
       nextDialogIndex = currentTopicContentLength - 1;
@@ -69,8 +72,10 @@ function App() {
       nextDialogIndex = 0;
     }
 
-    const nextTopicIndex = toTopicIndex == -1 ? getTopicIndex() : clamp(toTopicIndex, 0, topics.length);
-    window.location.href = `?dialogIndex=${nextDialogIndex}&topicIndex=${nextTopicIndex}`;
+    history.pushState({}, '', `?dialogIndex=${nextDialogIndex}&topicIndex=${nextTopicIndex}`);
+
+    setTopicIndex(nextTopicIndex);
+    setDialogIndex(nextDialogIndex);
   }
 
   return (
@@ -91,7 +96,7 @@ function App() {
           }
         </select>
         <div>
-          <span>Dialog {getDialogIndex() + 1} from {topics[getTopicIndex()].content.length - 1}</span>
+          <span>Dialog {getDialogIndex() + 1} from {topics[getTopicIndex()].content.length}</span>
         </div>
       </nav>
       <br/>
