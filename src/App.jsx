@@ -74,7 +74,7 @@ function App() {
   }
 
   return (
-    <div>
+    <div className='content'>
       <div>
         {
           topics.map((topic, index) => (
@@ -91,11 +91,6 @@ function App() {
         <span>{dialogIndex} from {topics[getTopicIndex()].content.length - 1}</span>
       </div>
       <br/>
-      <div>
-        <button onClick={() => toDialog(-1)}>Prev</button>
-        <button onClick={() => toDialog(1)}>Next</button>
-        <button onClick={() => setIsCaptionVisible(!isCaptionVisible)}>{isCaptionVisible ? 'Hide Kanji Reading' : 'Show Kanji Reading'}</button>
-      </div>
       {
         getCurrentTopicContent()?.utterances.map((value) => (
           <p
@@ -113,6 +108,11 @@ function App() {
           </p>
         ))
       }
+      <div className='controls'>
+        <button onClick={() => toDialog(-1)}>&lt;</button>
+        <button onClick={() => setIsCaptionVisible(!isCaptionVisible)}>{isCaptionVisible ? 'Hide Kanji Reading' : 'Show Kanji Reading'}</button>
+        <button onClick={() => toDialog(1)}>&gt;</button>
+      </div>
     </div>
   )
 }
