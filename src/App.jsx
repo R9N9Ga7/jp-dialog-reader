@@ -75,21 +75,25 @@ function App() {
 
   return (
     <div className='content'>
-      <div>
-        {
-          topics.map((topic, index) => (
-            <button
-              key={topic.title}
-              onClick={() => toDialogByIndex(0, index)}
-              className={index === getTopicIndex() ? 'active' : ''}
-            >{topic.title}</button>)
-          )
-        }
-      </div>
-      <br/>
-      <div>
-        <span>{dialogIndex} from {topics[getTopicIndex()].content.length - 1}</span>
-      </div>
+      <nav className='navigation'>
+        <select
+          value={getTopicIndex()}
+          onChange={(e) =>toDialogByIndex(0, parseInt(e.target.value ?? 0))}
+          id='topic-selector'
+        >
+          {
+            topics.map((topic, index) => (
+              <option
+                key={topic.title}
+                value={index}
+              >{topic.title}</option>)
+            )
+          }
+        </select>
+        <div>
+          <span>Dialog {getDialogIndex() + 1} from {topics[getTopicIndex()].content.length - 1}</span>
+        </div>
+      </nav>
       <br/>
       {
         getCurrentTopicContent()?.utterances.map((value) => (

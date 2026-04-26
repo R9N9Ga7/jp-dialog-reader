@@ -5,23 +5,6 @@
   text-align: center;
 }
 
-.logo {
-  height: 6em;
-  padding: 1.5em;
-  will-change: filter;
-  transition: filter 300ms;
-}
-.logo:hover {
-  filter: drop-shadow(0 0 2em #646cffaa);
-}
-.logo.react:hover {
-  filter: drop-shadow(0 0 2em #61dafbaa);
-}
-
-button {
-  margin: 0 10px;
-}
-
 p {
   font-size: 26px;
   line-height: 2;
@@ -54,14 +37,6 @@ p {
   }
 }
 
-.card {
-  padding: 2em;
-}
-
-.read-the-docs {
-  color: #888;
-}
-
 .caption {
   position: absolute;
   font-size: 16px;
@@ -79,8 +54,17 @@ p {
   width: 100%;
   display: flex;
   justify-content: center;
+  gap: 10px;
 }
 
 .content {
   padding-bottom: 20px;
+}
+
+nav {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #242424;
 }
