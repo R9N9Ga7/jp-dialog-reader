@@ -107,16 +107,12 @@ function App() {
             key={value.utterance + value.speaker}
           >
             {value.speaker}: {
-              isCaptionVisible ? (
-                value.tokens.map((pair, index) => (
-                    <span key={value.utterance + value.speaker + pair[0] + pair[1] + index} style={{ position: "relative", display: "inline-block" }}>
-                      <span className='caption'>{ pair[1] }</span>
-                      <span>{ pair[0] }</span>
-                    </span>
-                ))
-              ) : (
-                <span>{ value.utterance }</span>
-              )
+              value.tokens.map((pair, index) => (
+                <span key={value.utterance + value.speaker + pair[0] + pair[1] + index} style={{ position: "relative", display: "inline-block" }}>
+                  <span className='caption' style={{ display: isCaptionVisible ? 'block' : 'none' }}>{ pair[1] }</span>
+                  <span>{ pair[0] }</span>
+                </span>
+              ))
             }
           </p>
         ))
