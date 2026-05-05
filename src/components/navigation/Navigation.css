@@ -1,0 +1,7 @@
+.navigation {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  gap: 10px;
+  background-color: #242424;
+}

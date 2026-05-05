@@ -6,6 +6,7 @@ import topicSchool from './data/topic2.json';
 import topicTravel from './data/topic3.json';
 import topicHealth from './data/topic4.json';
 import topicEntertainment from './data/topic5.json';
+import { Navigation } from './components/navigation';
 
 const topics = [
   {
@@ -80,25 +81,13 @@ function App() {
 
   return (
     <div className='content'>
-      <nav className='navigation'>
-        <select
-          value={getTopicIndex()}
-          onChange={(e) =>toDialogByIndex(0, parseInt(e.target.value ?? 0))}
-          id='topic-selector'
-        >
-          {
-            topics.map((topic, index) => (
-              <option
-                key={topic.title}
-                value={index}
-              >{topic.title}</option>)
-            )
-          }
-        </select>
-        <div>
-          <span>Dialog {getDialogIndex() + 1} from {topics[getTopicIndex()].content.length}</span>
-        </div>
-      </nav>
+      <Navigation topics={
+        topics.map(value => value.title)}
+        currentTopicIndex={getTopicIndex()}
+        currentDialogIndex={getDialogIndex()}
+        currentTopicContentSize={topics[getTopicIndex()].content.length}
+        onSelect={(index) =>toDialogByIndex(0, index)}
+      />
       <br/>
       {
         getCurrentTopicContent()?.utterances.map((value) => (
