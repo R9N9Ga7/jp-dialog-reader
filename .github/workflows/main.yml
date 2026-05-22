@@ -32,7 +32,7 @@ jobs:
       - name: Install dependencies
         run: npm ci
       - name: Setup BASE_PATH for GitHub Pages
-        run: echo "VITE_BASE_PATH =/${{ github.event.repository.name }}/" >> $GITHUB_ENV
+        run: echo "VITE_BASE_PATH=/${{ github.event.repository.name }}/" >> $GITHUB_ENV
       - name: Build
         run: npm run build
       - name: Setup Pages
