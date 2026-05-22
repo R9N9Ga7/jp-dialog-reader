@@ -6,7 +6,7 @@ import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename='/jp-dialog-reader'>
       <Routes>
         <Route path='/' element={ <App /> } />
       </Routes>
