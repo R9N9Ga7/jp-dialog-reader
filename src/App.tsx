@@ -47,10 +47,14 @@ function App() {
                   key={value.utterance + value.speaker + pair[0] + pair[1] + index}
                   style={{ position: 'relative', display: 'inline-block' }}
                 >
-                  <span
-                    className='caption'
-                    style={{ display: isCaptionVisible ? 'block' : 'none' }}
-                  >{ pair[1] }</span>
+                  {
+                    pair[1] !== pair[0] && /* TODO: fix it */ pair[1] != '?' ? (
+                      <span
+                        className='caption'
+                        style={{ display: isCaptionVisible ? 'block' : 'none' }}
+                      >{ pair[1] }</span>
+                    ) : null
+                  }
                   <span>{ pair[0] }</span>
                 </span>
               ))
