@@ -55,7 +55,7 @@ function App() {
                       >{ pair[1] }</span>
                     ) : null
                   }
-                  <span>{ pair[0] }</span>
+                  <span style={{ 'letterSpacing': '0.1em' }}>{ pair[0] }</span>
                 </span>
               ))
             }
